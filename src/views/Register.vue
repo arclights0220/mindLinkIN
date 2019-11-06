@@ -95,7 +95,7 @@ export default {
           })
           .catch(err => {
             console.log(err);
-            alert("서버 오류..")
+            alert("오류")
           });
       }
     }
