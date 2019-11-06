@@ -1,6 +1,6 @@
 <template>
   <div id="register">
-    <div class="box">
+    <form class="box" @submit="submit">
       <h1>회원가입</h1>
       <input
         type="text"
@@ -34,9 +34,8 @@
         :class="{'input-err':err_password_check}"
       />
       <div style="color: red;">{{err_password_check}}</div>
-      <button @click="submit">회원가입</button>
-
-    </div>
+      <button type="submit" name="submit">회원가입</button>
+    </form>
   </div>
 </template>
 
@@ -45,19 +44,21 @@ import router from "../router/index";
 export default {
   data() {
     return {
-      username: null,
-      nickname: null,
-      password: null,
-      password_check: null,
+      username: "",
+      nickname: "",
+      password: "",
+      password_check: "",
 
-      err_username: null,
-      err_nickname: null,
-      err_password: null,
-      err_password_check: null
+      err_username: "",
+      err_nickname: "",
+      err_password: "",
+      err_password_check: ""
     };
   },
   methods: {
-    submit() {
+    submit(e) {
+      e.preventDefault();
+
       //에러 초기화
       this.err_username = "";
       this.err_nickname = "";
@@ -96,7 +97,7 @@ export default {
           .catch(err => {
             console.log(err);
             alert("오류")
-          });
+          });                                                             
       }
     }
   }

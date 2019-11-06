@@ -1,6 +1,6 @@
 <template>
   <div id="login">
-    <div class="box">
+    <form class="box" @submit="submit">
       <h1>로그인</h1>
       <input
         type="text"
@@ -18,9 +18,9 @@
         :class="{'input-err':err_password}"
       />
       <div style="color: red;">{{err_password}}</div>
-      <button @click="submit">로그인</button>
+      <button type="submit" name="submit">로그인</button>
       <div id="gotoregister" @click="register">계정이 없으신가요?</div>
-    </div>
+    </form>
   </div>
 </template>
 
@@ -37,7 +37,9 @@ export default {
     };
   },
   methods: {
-    submit() {
+    submit(e) {
+      e.preventDefault();
+
       //에러 초기화
       this.err_username = "";
       this.err_password = "";
