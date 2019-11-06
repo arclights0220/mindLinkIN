@@ -65,7 +65,7 @@ export default {
           })
           .catch(err => {
             console.log(err);
-            alert("사용자 정보가 없습니다..");
+            alert("사용자 정보가 없거나 서버 점검중입니다...");
           });
       }
     },

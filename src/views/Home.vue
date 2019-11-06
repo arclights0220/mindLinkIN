@@ -58,7 +58,7 @@
         if(confirm("정말로 로그아웃 하시겠습니까?"))
           this.$store.state.logon = false;
           this.$store.state.userData = {};
-          router.push('/Home.vue');
+          router.push('/');
       },
       getName(){
         this.nickname = getUserData.nickname.substr(0, 6);

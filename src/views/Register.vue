@@ -80,7 +80,6 @@ export default {
         !this.err_password &&
         !this.err_password_check
       ) {
-        this.$store.state.logon = true;
         let userobj = {
           email: this.username,
           nickname: this.nickname,
@@ -91,10 +90,12 @@ export default {
           .dispatch("REGISTER", userobj)
           .then(data => {
             console.log(data);
+            this.$store.state.logon = true;
             router.push("/login");
           })
           .catch(err => {
             console.log(err);
+            alert("서버 오류..")
           });
       }
     }
