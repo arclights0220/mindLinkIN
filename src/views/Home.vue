@@ -7,7 +7,7 @@
         <li class="menubar-item">개요</li>
         <li class="menubar-item">탐색</li>
         <li class="menubar-search"><input type="text" id="search" placeholder="검색어 입력"></li>
-        <li class="menubar-item" v-if="logon">{{getUserData.nickname}}</li>
+        <li class="menubar-item" v-if="logon" @click="mypageListener">{{getUserData.nickname}}</li>
         <li style="diplay: none;" v-else></li>
         <li class="menubar-item menubar-login" v-if="!logon" @click="loginListener">로그인</li>
         <li class="menubar-item menubar-login" v-else @click="logoutListener">로그아웃</li>
@@ -57,10 +57,15 @@
       logoutListener(){
         if(confirm("정말로 로그아웃 하시겠습니까?"))
           this.$store.state.logon = false;
+          this.$store.state.userData = {};
+          router.push('/Home.vue');
       },
       getName(){
         this.nickname = getUserData.nickname.substr(0, 6);
         return this.nickname;
+      },
+      mypageListener(){
+        router.push("/mypage");
       }
     },
     computed:{
@@ -156,12 +161,12 @@
       
     width: 4.5vw;
     height: 75px;
+    cursor: pointer;
 
     box-sizing: border-box;
     border-top: 5px solid transparent;
     border-bottom: 5px solid transparent;
 
-    cursor: pointer;
   }
   .menubar-item:hover{
     transition: 500ms;
@@ -173,6 +178,7 @@
     align-items: center;
       
     margin-left: auto;
+    cursor: pointer;
     margin-right: 1vw;
   }
   #search{

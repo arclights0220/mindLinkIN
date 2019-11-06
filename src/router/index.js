@@ -6,6 +6,7 @@ import TeamResearch from '../views/TeamResearch'
 import RoomResearch from '../views/RoomResearch'
 import Login from '../views/Login'
 import Register from '../views/Register'
+import Mypage from '../views/Mypage'
 
 Vue.use(VueRouter)
 
@@ -34,6 +35,10 @@ const routes = [
     path: '/register',
     component: Register 
   },
+  {
+    path: '/mypage',
+    component: Mypage
+  }
 ]
 
 export default new VueRouter({
