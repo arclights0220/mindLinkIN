@@ -32,12 +32,12 @@
         align-items: center;
         flex-direction: column;
 
-        background-size: cover;
+        /* background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
         background-attachment: fixed;
 
-        background-image: linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("../mindmap.jpeg");
+        background-image: linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("../mindmap.jpeg"); */
     }
 
     .list-item{

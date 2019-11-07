@@ -1,43 +1,99 @@
 <template>
-  <div id="home">
+  <div id="mypage">
     <nav>
       <ul id="menubar">
-        <li class="menubar-logo">
-          <img src="../assets/logo.png" alt />
-        </li>
-        <li class="menubar-title" @click="push">마인드링크</li>
-        <li class="menubar-item">개요</li>
-        <li class="menubar-item">탐색</li>
-        <li class="menubar-search">
-          <input type="text" id="search" placeholder="검색어 입력" />
-        </li>
+        <li class="menubar-logo"><img src="../assets/logo.png" alt=""/></li>
+        <li class="menubar-title" @click="home">마인드링크</li>
+        <li class="menubar-item">친구</li>
+        <li class="menubar-item">팀</li>
+        <li class="menubar-item">회의실</li>
+        <li class="menubar-search"><input type="text" id="search" placeholder="검색어 입력"/></li>
         <li class="menubar-item" v-if="logon" @click="mypageListener">{{getUserData.nickname}}</li>
         <li style="diplay: none;" v-else></li>
         <li class="menubar-item menubar-login" v-if="!logon" @click="loginListener">로그인</li>
         <li class="menubar-item menubar-login" v-else @click="logoutListener">로그아웃</li>
       </ul>
     </nav>
-    <section>
-      <div id="mypage-main">
-        <div class="mypage-logo">
-          <h1 style="font-size: 4em;margin-left: 2vw;">My Page</h1>
+    <article>
+      <section class="profile">
+        <h1 class="title">{{getUserData.nickname}}</h1>
+        <img src="../test_pi.jpg" alt="" class="profile-img">
+        <div class="profile-text">
+          <div class="about">
+            선린인터넷고등학교 소프트웨어과에 재학중이다. <br>
+            현재 동아리는 애드캔이나, 아이왑이 더 좋다고 생각한다. <br>
+            대회 6개 터뜨리고 현타와서 프밍을 접으려 했으나 <br>
+            요즘은 리버스 엔지니어링을 공부하고 있다. <br>
+            영타가 좀 많이 느리다...
+          </div>
+          <div class="specialty">
+            전문 분야 : <span class="specialty-item">C/C++</span>
+          </div>
         </div>
-        <div class="mypage-set">
-          <div class="mypage-privacy"></div>
-          <div class="mypage-team"></div>
-          <div class="mypage-public"></div>
+      </section>
+      <section class="main">
+        <div class="main-friends">
+          <h1 class="title">친구</h1>
+          <List 
+          :items="friends"
+          :showDetail="showUserProfile"
+          :followText="'친구 추가'" :unfollowText="'친구 삭제'" 
+          :followEvent="follow" :unfollowEvent="unfollow" 
+          />
+          <div class="add">
+            <img src="../add.png" alt="">
+          </div>
         </div>
-      </div>
-    </section>
+        <div class="main-teams">
+          <h1 class="title">팀</h1>
+          <List 
+          :items="teams"
+          :showDetail="showUserProfile"
+          :followText="'가입 요청'" :unfollowText="'나가기'" 
+          :followEvent="follow" :unfollowEvent="unfollow" 
+          />
+          <div class="add">
+            <img src="../add.png" alt="">
+          </div>
+        </div>
+        <div class="main-rooms">
+          <h1 class="title">회의실</h1>
+          <List 
+          :items="rooms"
+          :showDetail="showUserProfile"
+          :followText="'참여 요청'" :unfollowText="'나가기'" 
+          :followEvent="follow" :unfollowEvent="unfollow" 
+          />
+          <div class="add" @click="roomResearch">
+            <img src="../add.png" alt="">
+          </div>
+        </div>
+      </section>
+    </article>
   </div>
 </template>
 
 <script>
+import List from '../components/List'
 import router from "../router/index";
 export default {
+  components:{
+    List
+  },
   data() {
     return {
-      nickname: ""
+      friends: [
+        {username: 1, nickname: "박창우", specialty: "운명 수호", following: true},
+        {username: 2, nickname: "송호준", specialty: "Web Engineering", following: true},
+        {username: 3, nickname: "김도영", specialty: "Assembly", following: true},
+      ],
+      teams: [
+        {username: 2, nickname: "에드캔", specialty: "찬효가 부장이니 곧 좋아질 예정", following: true},
+      ],
+      rooms: [
+        {username: 1, nickname: "디콘방", specialty: "얘들아 미안해 ㅜㅜ", following: true},
+        {username: 3, nickname: "정보통신 수행방", specialty: "시온아 미리 미안해 ㅜㅜ", following: true},       
+      ]
     };
   },
   methods: {
@@ -45,21 +101,18 @@ export default {
       router.push("/login");
     },
     logoutListener() {
-      if (confirm("정말로 로그아웃 하시겠습니까?"))
+      if(confirm("정말로 로그아웃 하시겠습니까?")){
         this.$store.state.logon = false;
-      this.$store.state.userData = {};
+        this.$store.state.userData = {};
+        router.push('/');
+      }
+    },
+    home() {
       router.push("/");
     },
-    getName() {
-      this.nickname = getUserData.nickname.substr(0, 6);
-      return this.nickname;
+    roomResearch(){
+      router.push("/research/room");
     },
-    mypageListener() {
-      router.push("/mypage");
-    },
-    push() {
-      router.push("/");
-    }
   },
   computed: {
     logon() {
@@ -73,17 +126,34 @@ export default {
 </script>
 
 <style scoped>
-body {
+nav{
   margin: 0;
   padding: 0;
-  width: 100vw;
-  height: 100vh;
 }
+h1{
+  margin: 0;
+}
+
+#mypage{
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+
+  background-image: linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("../mindmap.jpeg");
+
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
 #menubar {
   background-color: black;
 
+  box-shadow: 1px 1px 5px black;
+
   font-family: "Noto Sans KR", sans-serif;
   word-break: keep-all;
+
+  position: fixed;
 
   display: flex;
 
@@ -92,6 +162,8 @@ body {
 
   padding: 0;
   margin: 0;
+
+  z-index: 1;
 }
 .menubar-logo {
   display: flex;
@@ -179,36 +251,91 @@ body {
 
   margin-right: 15vw;
 }
-#mypage-main {
-  width: 100vw;
+
+article{
   display: flex;
+}
+
+.title{
+  color: white;
+
+  text-align: center;
+  font-size: 3vw;
+
+  margin: 1vw;
+}
+
+.profile{
+  color: white;
+
+  background-color: black;
+
+  box-shadow: 1px 1px 5px black;
+
+  position: fixed;
+
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  width: 30vw;
+  height: 100vh;
+
+  padding: 7.5vw 5vw;
+}
+.profile-img{
+  width: 15vw; 
+  height: 15vw;
+  object-fit: cover;
+  border-radius: 50%;
+
+  cursor: pointer;
+
+  margin: 2.5vw;
+}
+.profile-text .specialty{
+  margin: 1vw 0;
+}
+.profile-text .specialty-item{
+  color: lightgray;
+
+  background-color: gray;
+
+  padding: 0 5px;
+  border-radius: 2.5px;
+}
+
+.main{
+  margin-top: 100px;
+  margin-left: 53vw; 
+}
+.main>*{
+  display: flex;
+  align-items: center;
   flex-direction: column;
 }
-.mypage-set {
+
+.add{
+  color: white;
+
+  background-color: black;
+
+  box-shadow: 1px 1px 5px black;
+
+  font-family: 'Noto Sans KR', sans-serif;
+
   display: flex;
-  flex-direction: row;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
+
+  width: 35vw;
+  height: 100px;
+
+  margin-top: 10px;
+  margin-bottom: 5vw;
 }
-.mypage-privacy {
-  width: 25%;
-  padding: 5vh 5vw 5vh 5vw;
-  border: 1px solid black;
-  margin: 0px 10px;
-  margin-right: 5px;
-}
-.mypage-team {
-  width: 25%;
-  padding: 5vh 5vw 5vh 5vw;
-  border: 1px solid black;
-  margin: 0px 5px;
-}
-.mypage-public {
-  width: 25%;
-  padding: 5vh 5vw 5vh 5vw;
-  border: 1px solid black;
-  margin: 0px 10px;
-  margin-left: 5px;
+.add img{
+  width: 50px;
+  height: 50px;
 }
 </style>
-

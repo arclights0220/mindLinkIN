@@ -7,7 +7,7 @@
         <li class="menubar-item">개요</li>
         <li class="menubar-item">탐색</li>
         <li class="menubar-search"><input type="text" id="search" placeholder="검색어 입력"></li>
-        <li class="menubar-item" v-if="logon" @click="mypageListener">{{getUserData.nickname}}</li>
+        <li class="menubar-item" v-if="logon" @click="mypage">{{getUserData.nickname}}</li>
         <li style="diplay: none;" v-else></li>
         <li class="menubar-item menubar-login" v-if="!logon" @click="loginListener">로그인</li>
         <li class="menubar-item menubar-login" v-else @click="logoutListener">로그아웃</li>
@@ -55,16 +55,13 @@
         router.push("/login");
       },
       logoutListener(){
-        if(confirm("정말로 로그아웃 하시겠습니까?"))
+        if(confirm("정말로 로그아웃 하시겠습니까?")){
           this.$store.state.logon = false;
           this.$store.state.userData = {};
           router.push('/');
+        }
       },
-      getName(){
-        this.nickname = getUserData.nickname.substr(0, 6);
-        return this.nickname;
-      },
-      mypageListener(){
+      mypage(){
         router.push("/mypage");
       }
     },
@@ -89,11 +86,6 @@
     font-family: 'EB Garamond', serif; 가는 영어
     font-family: 'Crete Round', serif; 중간 영어
 */
-  body{
-    margin: 0;
-    padding: 0;
-    width: 100vw;
-  }
   nav{
     margin: 0;
     padding: 0;
@@ -111,6 +103,8 @@
 
   #menubar{
     background-color: black;
+
+    box-shadow: 1px 1px 5px black;
 
     font-family: 'Noto Sans KR', sans-serif;
     word-break: keep-all;

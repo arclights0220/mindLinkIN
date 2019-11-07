@@ -7,6 +7,8 @@ import RoomResearch from '../views/RoomResearch'
 import Login from '../views/Login'
 import Register from '../views/Register'
 import Mypage from '../views/Mypage'
+import CreateRoom from '../views/CreateRoom'
+import CreatePrivacyRoom from '../views/CreatePrivacyRoom'
 
 Vue.use(VueRouter)
 
@@ -14,6 +16,18 @@ const routes = [
   {
     path: '/',
     component: Home
+  },
+  {
+    path: '/mypage',
+    component: Mypage
+  },
+  { 
+    path: '/login',
+    component: Login 
+  },
+  { 
+    path: '/register',
+    component: Register 
   },
   { 
     path: '/research/friend',
@@ -28,17 +42,13 @@ const routes = [
     component: RoomResearch 
   },
   { 
-    path: '/login',
-    component: Login 
+    path: '/create/room',
+    component: CreateRoom 
   },
   { 
-    path: '/register',
-    component: Register 
+    path: '/create/room/privacy',
+    component: CreatePrivacyRoom
   },
-  {
-    path: '/mypage',
-    component: Mypage
-  }
 ]
 
 export default new VueRouter({
