@@ -1,8 +1,5 @@
-var stroke=getElementById("stroke").value;
-
 function init() {
 
-  
   var $ = go.GraphObject.make;
 
   myDiagram =
@@ -35,16 +32,12 @@ function init() {
           stretch: go.GraphObject.Horizontal,
           strokeWidth: 5,
           maxSize:new go.Size(150,150),
-          // this line shape is the port -- what links connect with
           portId: "", fromSpot: go.Spot.LeftRightSides, toSpot: go.Spot.LeftRightSides
         },
         new go.Binding("stroke", "brush"),
-        // make sure links come in from the proper direction and go out appropriately
         new go.Binding("fromSpot", "dir", function(d) { return spotConverter(d, true); }),
         new go.Binding("toSpot", "dir", function(d) { return spotConverter(d, false); })),
-      // remember the locations of each node in the node data
       new go.Binding("location", "loc", go.Point.parse).makeTwoWay(go.Point.stringify),
-      // make sure text "grows" in the desired direction
       new go.Binding("locationSpot", "dir", function(d) { return spotConverter(d, false); }),
 
       $(go.TextBlock,
@@ -55,8 +48,7 @@ function init() {
           editable: true
         },
         new go.Binding("text", "text").makeTwoWay(),
-        new go.Binding("scale", "scale").makeTwoWay(),
-        new go.Binding("font", "font").makeTwoWay())
+        )
     );
 
   myDiagram.nodeTemplate.selectionAdornmentTemplate =
@@ -79,34 +71,34 @@ function init() {
   myDiagram.nodeTemplate.contextMenu =
     $("ContextMenu",
       $("ContextMenuButton",
-        $(go.TextBlock, "Bigger"),
+        $(go.TextBlock, "글자 크게"),
         { click: function(e, obj) { changeTextSize(obj, 1.1); } }),
       $("ContextMenuButton",
-        $(go.TextBlock, "Smaller"),
+        $(go.TextBlock, "글자 작게"),
         { click: function(e, obj) { changeTextSize(obj, 1 / 1.1); } }),
       $("ContextMenuButton",
-        $(go.TextBlock, "Bold/Normal"),
+        $(go.TextBlock, "굵게/얇게"),
         { click: function(e, obj) { toggleTextWeight(obj); } }),
       $("ContextMenuButton",
-        $(go.TextBlock, "Copy"),
-        { click: function(e, obj) { e.diagram.commandHandler.copySelection(); } }),
+        $(go.TextBlock, "복사"),
+        { click: function(e, obj) {if(e.key!=0) e.diagram.commandHandler.copySelection(); } }),
       $("ContextMenuButton",
-        $(go.TextBlock, "Delete"),
-        { click: function(e, obj) { e.diagram.commandHandler.deleteSelection(); } }),
+        $(go.TextBlock, "삭제"),
+        { click: function(e, obj) {if(e.key!=0) e.diagram.commandHandler.deleteSelection(); } }),
       $("ContextMenuButton",
-        $(go.TextBlock, "Undo"),
+        $(go.TextBlock, "실행 취소"),
         { click: function(e, obj) { e.diagram.commandHandler.undo(); } }),
       $("ContextMenuButton",
-        $(go.TextBlock, "Redo"),
+        $(go.TextBlock, "실행 복원"),
         { click: function(e, obj) { e.diagram.commandHandler.redo(); } }),
       $("ContextMenuButton",
-        $(go.TextBlock, "Sort"),
+        $(go.TextBlock, "정렬"),
         {
           click: function(e, obj) {
-            var adorn = obj.part;
-            adorn.diagram.startTransaction("Subtree Layout");
-            layoutTree(adorn.adornedPart);
-            adorn.diagram.commitTransaction("Subtree Layout");
+            var sort = obj.part;
+            sort.diagram.startTransaction("Subtree Layout");
+            layoutTree(sort.adornedPart);
+            sort.diagram.commitTransaction("Subtree Layout");
           }
         }
       )
@@ -131,21 +123,21 @@ function init() {
   myDiagram.contextMenu =
     $("ContextMenu",
       $("ContextMenuButton",
-        $(go.TextBlock, "Paste"),
+        $(go.TextBlock, "붙여넣기"),
         { click: function(e, obj) { e.diagram.commandHandler.pasteSelection(e.diagram.lastInput.documentPoint); } }),
       $("ContextMenuButton",
-        $(go.TextBlock, "Undo"),
+        $(go.TextBlock, "실행 취소"),
         { click: function(e, obj) { e.diagram.commandHandler.undo(); } },
         new go.Binding("visible", "", function(o) { return o.diagram && o.diagram.commandHandler.canUndo(); }).ofObject()),
       $("ContextMenuButton",
-        $(go.TextBlock, "Redo"),
+        $(go.TextBlock, "실행 복원"),
         { click: function(e, obj) { e.diagram.commandHandler.redo(); } },
         new go.Binding("visible", "", function(o) { return o.diagram && o.diagram.commandHandler.canRedo(); }).ofObject()),
       $("ContextMenuButton",
-        $(go.TextBlock, "Save"),
+        $(go.TextBlock, "저장"),
         { click: function(e, obj) { save(); } }),
       $("ContextMenuButton",
-        $(go.TextBlock, "Load"),
+        $(go.TextBlock, "로드"),
         { click: function(e, obj) { load(); } })
     );
 
@@ -178,8 +170,8 @@ function changeTextSize(obj, factor) {
   var adorn = obj.part;
   adorn.diagram.startTransaction("Change Text Size");
   var node = adorn.adornedPart;
-  var tb = node.findObject("TEXT");
-  tb.scale *= factor;
+  var t = node.findObject("TEXT");
+  t.scale *= factor;
   adorn.diagram.commitTransaction("Change Text Size");
 }
 
@@ -187,21 +179,21 @@ function toggleTextWeight(obj) {
   var adorn = obj.part;
   adorn.diagram.startTransaction("Change Text Weight");
   var node = adorn.adornedPart;
-  var tb = node.findObject("TEXT");
+  var t = node.findObject("TEXT");
   var idx = tb.font.indexOf("bold");
   if (idx < 0) {
-    tb.font = "bold " + tb.font;
+    t.font = "bold " + t.font;
   } else {
-    tb.font = tb.font.substr(idx + 5);
+    t.font = t.font.substr(idx + 5);
   }
   adorn.diagram.commitTransaction("Change Text Weight");
 }
 
 function updateNodeDirection(node, dir) {
   myDiagram.model.setDataProperty(node.data, "dir", dir);
-  var chl = node.findTreeChildrenNodes(); 
-  while (chl.next()) {
-    updateNodeDirection(chl.value, dir);
+  var cnode = node.findTreeChildrenNodes(); 
+  while (cnode.next()) {
+    updateNodeDirection(cnode.value, dir);
   }
 }
 
@@ -225,7 +217,7 @@ function addNodeAndLink(e, obj) {
 
 function layoutTree(node) {
   if (node.data.key === 0) { 
-    layoutAll();  
+    Sort();  
   } else {  
     var parts = node.findTreeParts();
     layoutAngle(parts, node.data.dir === "left" ? 180 : 0);
@@ -245,26 +237,26 @@ function layoutAngle(parts, angle) {
   layout.doLayout(parts);
 }
 
-function layoutAll() {
+function Sort() {
   var root = myDiagram.findNodeForKey(0);
   if (root === null) return;
   myDiagram.startTransaction("Layout");
-  var rightward = new go.Set();
-  var leftward = new go.Set();
+  var right = new go.Set();
+  var left = new go.Set();
   root.findLinksConnected().each(function(link) {
     var child = link.toNode;
     if (child.data.dir === "left") {
-      leftward.add(root); 
-      leftward.add(link);
-      leftward.addAll(child.findTreeParts());
+      left.add(root); 
+      left.add(link);
+      left.addAll(child.findTreeParts());
     } else {
-      rightward.add(root); 
-      rightward.add(link);
-      rightward.addAll(child.findTreeParts());
+      right.add(root); 
+      right.add(link);
+      right.addAll(child.findTreeParts());
     }
   });
-  layoutAngle(rightward, 0);
-  layoutAngle(leftward, 180);
+  layoutAngle(right, 0);
+  layoutAngle(left, 180);
   myDiagram.commitTransaction("Layout");
 }
 
@@ -275,5 +267,5 @@ function save() {
 }
 function load() {
   myDiagram.model = go.Model.fromJson(document.getElementById("mySavedModel").value);
-  layoutAll();
+  Sort();
 }
