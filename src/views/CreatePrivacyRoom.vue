@@ -37,6 +37,7 @@ export default {
 
             //정상일 때
             if (!this.err_roomname) {
+              this.$store.state.roomName=this.roomname;
               router.push('/fuck', init);
             }
         },
