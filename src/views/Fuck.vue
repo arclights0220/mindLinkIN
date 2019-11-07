@@ -14,8 +14,14 @@
         </textarea>
     </div>
 </template>
+<script type="text/javascript"></script>
+export default {
+    
+}
+</script>
 
 <script>
+
 export default {
     mounted: function() {
         init();
