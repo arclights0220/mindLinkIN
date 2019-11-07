@@ -18,7 +18,7 @@
 import List from '../components/List'
 export default {
     components:{
-        List
+        List,
     },
     data(){
         return{
@@ -26,7 +26,7 @@ export default {
                 {username: 1, nickname: "신진혁", specialty: "C/C++", following: false},
                 {username: 2, nickname: "송호준", specialty: "Web Engineering", following: true},
                 {username: 3, nickname: "이준상", specialty: "algorithm", following: false},
-            ]
+            ],
         }
     },
     methods:{
@@ -41,8 +41,8 @@ export default {
         unfollow(id){
             console.log('unfollow');
             return;
-        }
-    }
+        },
+    },
 }
 </script>
 

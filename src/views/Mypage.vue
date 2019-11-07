@@ -74,11 +74,11 @@
 </template>
 
 <script>
-import List from '../components/List'
 import router from "../router/index";
+import List from '../components/List'
 export default {
   components:{
-    List
+    List,
   },
   data() {
     return {
@@ -93,7 +93,7 @@ export default {
       rooms: [
         {username: 1, nickname: "디콘방", specialty: "얘들아 미안해 ㅜㅜ", following: true},
         {username: 3, nickname: "정보통신 수행방", specialty: "시온아 미리 미안해 ㅜㅜ", following: true},       
-      ]
+      ],
     };
   },
   methods: {
@@ -113,6 +113,9 @@ export default {
     roomResearch(){
       router.push("/research/room");
     },
+    none(){
+      return;
+    },
   },
   computed: {
     logon() {
@@ -120,8 +123,8 @@ export default {
     },
     getUserData() {
       return this.$store.state.userData;
-    }
-  }
+    },
+  },
 };
 </script>
 

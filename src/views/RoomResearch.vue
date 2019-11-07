@@ -19,7 +19,7 @@ import router from "../router/index";
 import List from '../components/List'
 export default {
     components:{
-        List
+        List,
     },
     data(){
         return{
@@ -27,7 +27,7 @@ export default {
                 {username: 1, nickname: "디콘방", specialty: "얘들아 미안해 ㅜㅜ", following: true},
                 {username: 2, nickname: "천코대", specialty: "준상아 미안해 ㅜㅜ", following: false},
                 {username: 3, nickname: "정보통신 수행방", specialty: "시온아 미리 미안해 ㅜㅜ", following: true},
-            ]
+            ],
         }
     },
     methods:{
@@ -54,7 +54,7 @@ export default {
         logon(){
             return this.$store.state.logon
         },
-    }
+    },
 }
 </script>
 

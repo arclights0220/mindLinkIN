@@ -33,7 +33,7 @@ export default {
       password: "",
 
       err_username: "",
-      err_password: ""
+      err_password: "",
     };
   },
   methods: {
@@ -73,8 +73,8 @@ export default {
     },
     register() {
       router.push("/register");
-    }
-  }
+    },
+  },
 };
 </script>
 

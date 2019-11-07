@@ -43,37 +43,37 @@
 </template>
 
 <script>
-  import router from '../router/index'
-  export default {
-    data(){
-      return{
-        nickname: ""
-      }
-    },
-    methods:{
-      loginListener(){
-        router.push("/login");
-      },
-      logoutListener(){
-        if(confirm("정말로 로그아웃 하시겠습니까?")){
-          this.$store.state.logon = false;
-          this.$store.state.userData = {};
-          router.push('/');
-        }
-      },
-      mypage(){
-        router.push("/mypage");
-      }
-    },
-    computed:{
-      logon(){
-        return this.$store.state.logon
-      },
-      getUserData(){
-        return this.$store.state.userData
-      }
+import router from '../router/index'
+export default {
+  data(){
+    return{
+      nickname: "",
     }
-  }
+  },
+  methods:{
+    loginListener(){
+      router.push("/login");
+    },
+    logoutListener(){
+      if(confirm("정말로 로그아웃 하시겠습니까?")){
+        this.$store.state.logon = false;
+        this.$store.state.userData = {};
+        router.push('/');
+      }
+    },
+    mypage(){
+      router.push("/mypage");
+    },
+  },
+  computed:{
+    logon(){
+      return this.$store.state.logon
+    },
+    getUserData(){
+      return this.$store.state.userData
+    },
+  },
+}
 </script>
 
 <style scoped>
@@ -86,209 +86,209 @@
     font-family: 'EB Garamond', serif; 가는 영어
     font-family: 'Crete Round', serif; 중간 영어
 */
-  nav{
-    margin: 0;
-    padding: 0;
-  }
-  h1{
-    margin: 0;
-  }
+nav{
+  margin: 0;
+  padding: 0;
+}
+h1{
+  margin: 0;
+}
 
-  .image{
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-  }
+.image{
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
 
-  #menubar{
-    background-color: black;
+#menubar{
+  background-color: black;
 
-    box-shadow: 1px 1px 5px black;
+  box-shadow: 1px 1px 5px black;
 
-    font-family: 'Noto Sans KR', sans-serif;
-    word-break: keep-all;
+  font-family: 'Noto Sans KR', sans-serif;
+  word-break: keep-all;
 
-    position: fixed;
+  position: fixed;
 
-    display: flex;
+  display: flex;
 
-    width: 100vw;
-    height: 75px;
+  width: 100vw;
+  height: 75px;
 
-    padding: 0;
-    margin: 0;
-  }
-  .menubar-logo{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .menubar-logo img{
-    width: 40px;
-    height: auto;
+  padding: 0;
+  margin: 0;
+}
+.menubar-logo{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.menubar-logo img{
+  width: 40px;
+  height: auto;
 
-    padding: 0px 10px 0px 20px;
-    margin-left: 15vw;
-  }
-  .menubar-title{
-    color: #ffffff;
+  padding: 0px 10px 0px 20px;
+  margin-left: 15vw;
+}
+.menubar-title{
+  color: #ffffff;
 
-    font-size: 2vw;
-    text-align: center;
+  font-size: 2vw;
+  text-align: center;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-    padding: 0px 20px 0px 10px;
-  }
-  .menubar-item{
-    color: #ffffff;
+  padding: 0px 20px 0px 10px;
+}
+.menubar-item{
+  color: #ffffff;
 
-    font-size: 1vw;
-    text-align: center;
+  font-size: 1vw;
+  text-align: center;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-      
-    width: 4.5vw;
-    height: 75px;
-    cursor: pointer;
-
-    box-sizing: border-box;
-    border-top: 5px solid transparent;
-    border-bottom: 5px solid transparent;
-
-  }
-  .menubar-item:hover{
-    transition: 500ms;
-    border-top: 5px solid #ffffff;;
-  }
-  .menubar-search{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-      
-    margin-left: auto;
-    cursor: pointer;
-    margin-right: 1vw;
-  }
-  #search{
-    color: white;
-
-    background-color: rgb(71, 71, 77);
-
-    width: 15vw;
-    height: 30px;
-
-    padding: 5px 10px 5px 10px;
-    border: hidden; 
-    border-radius: 5px;
-  }
-  ::placeholder {
-    color: rgb(90, 90, 90);
-    opacity: 1;
-  }
-  .menubar-login{
-    color: #ffffff;
-
-    font-size: 1vw;
-    text-align: center;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
     
-    margin-right: 15vw;
-  }
+  width: 4.5vw;
+  height: 75px;
+  cursor: pointer;
 
-  .title{
-    text-align: center;
-    font-size: 5vw;
-    font-family: 'Noto Sans KR', sans-serif;
+  box-sizing: border-box;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+
+}
+.menubar-item:hover{
+  transition: 500ms;
+  border-top: 5px solid #ffffff;;
+}
+.menubar-search{
+  display: flex;
+  justify-content: center;
+  align-items: center;
     
-    padding: 40px 0px 40px 0px;
-  }
+  margin-left: auto;
+  cursor: pointer;
+  margin-right: 1vw;
+}
+#search{
+  color: white;
 
-  #outline{
-    color: white;
+  background-color: rgb(71, 71, 77);
 
-    background-color: black;
-    height: 100vh;
+  width: 15vw;
+  height: 30px;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  #outline .text{
-    font-family: 'Noto Sans KR', sans-serif;
+  padding: 5px 10px 5px 10px;
+  border: hidden; 
+  border-radius: 5px;
+}
+::placeholder {
+  color: rgb(90, 90, 90);
+  opacity: 1;
+}
+.menubar-login{
+  color: #ffffff;
 
-    width: 40vw;
-    height: auto;
-  }
-  #outline .image img{
-    width: 20vw;
-    height: auto;
-  }
+  font-size: 1vw;
+  text-align: center;
 
-  #research{
-    font-family: 'Noto Sans KR', sans-serif;
-    font-size: 3vw;
-    overflow-x: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  margin-right: 15vw;
+}
 
-    background-image: url("../mindmap.jpeg");
+.title{
+  text-align: center;
+  font-size: 5vw;
+  font-family: 'Noto Sans KR', sans-serif;
+  
+  padding: 40px 0px 40px 0px;
+}
 
-    display: flex;
+#outline{
+  color: white;
 
-    width: 100vw;
-    height: 100vh;
-  }
-  #research-friend{
-    color: white;
+  background-color: black;
+  height: 100vh;
 
-    text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#outline .text{
+  font-family: 'Noto Sans KR', sans-serif;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  width: 40vw;
+  height: auto;
+}
+#outline .image img{
+  width: 20vw;
+  height: auto;
+}
 
-    width: 100vw;
-    height: 100vh;
-  }
-  #research-team{
-    color: white;
+#research{
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 3vw;
+  overflow-x: hidden;
 
-    text-decoration: none;
+  background-image: url("../mindmap.jpeg");
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    animation-delay: 1s;
+  display: flex;
 
-    width: 100vw;
-    height: 100vh;
-  }
-  #research-room{
-    color: white;
+  width: 100vw;
+  height: 100vh;
+}
+#research-friend{
+  color: white;
 
-    text-decoration: none;
+  text-decoration: none;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-    width: 100vw;
-    height: 100vh;
-  }
-  #research-friend:hover{
-    background-image: linear-gradient(to bottom, rgba(255,255,255,0.25), rgba(255,255,255,0.25));
-  }
-  #research-team:hover{
-    background-image: linear-gradient(to bottom, rgba(255,255,255,0.25), rgba(255,255,255,0.25));
-  }
-  #research-room:hover{
-    background-image: linear-gradient(to bottom, rgba(255,255,255,0.25), rgba(255,255,255,0.25));
-  }
+  width: 100vw;
+  height: 100vh;
+}
+#research-team{
+  color: white;
+
+  text-decoration: none;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation-delay: 1s;
+
+  width: 100vw;
+  height: 100vh;
+}
+#research-room{
+  color: white;
+
+  text-decoration: none;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100vw;
+  height: 100vh;
+}
+#research-friend:hover{
+  background-image: linear-gradient(to bottom, rgba(255,255,255,0.25), rgba(255,255,255,0.25));
+}
+#research-team:hover{
+  background-image: linear-gradient(to bottom, rgba(255,255,255,0.25), rgba(255,255,255,0.25));
+}
+#research-room:hover{
+  background-image: linear-gradient(to bottom, rgba(255,255,255,0.25), rgba(255,255,255,0.25));
+}
 </style>

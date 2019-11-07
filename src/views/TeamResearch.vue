@@ -26,7 +26,7 @@ export default {
                 {username: 1, nickname: "아이왑", specialty: "Web / 선린에서 젤 좋음", following: false},
                 {username: 2, nickname: "에드캔", specialty: "찬효가 부장이니 곧 좋아질 예정", following: true},
                 {username: 3, nickname: "RG", specialty: "Game", following: false},
-            ]
+            ],
         }
     },
     methods:{
@@ -41,8 +41,8 @@ export default {
         leave(id){
             console.log('left');
             return;
-        }
-    }
+        },
+    },
 }
 </script>
 

@@ -11,84 +11,75 @@
 </template>
 
 <script>
-    export default {
-        props:{
-            items: Array,
+export default {
+    props:{
+        items: Array,
 
-            showDetail: Function,
+        showDetail: Function,
 
-            followText: String,
-            unfollowText: String,
+        followText: String,
+        unfollowText: String,
 
-            followEvent: Function,
-            unfollowEvent: Function,
-        }
-    }
+        followEvent: Function,
+        unfollowEvent: Function,
+    },
+}
 </script>
 
 <style scoped>
-    #list{
-        display: flex;
-        align-items: center;
-        flex-direction: column;
+#list{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
 
-        /* background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-attachment: fixed;
+.list-item{
+    color: white;
 
-        background-image: linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("../mindmap.jpeg"); */
-    }
+    background-color: black;
 
-    .list-item{
-        color: white;
+    box-shadow: 1px 1px 5px black;
 
-        background-color: black;
+    font-family: 'Noto Sans KR', sans-serif;
 
-        box-shadow: 1px 1px 5px black;
+    display: flex;
+    align-items: center;
 
-        font-family: 'Noto Sans KR', sans-serif;
+    width: 35vw;
+    height: 100px;
 
-        display: flex;
-        align-items: center;
+    margin: 10px auto;
+}
 
-        width: 35vw;
-        height: 100px;
+.list-item .image{
+    width: 70px; 
+    height: 70px;
+    object-fit: cover;
+    border-radius: 50%;
 
-        margin: 10px auto;
-    }
+    margin-left: 1vw;
+    margin-right: 1vw;
 
-    .list-item .image{
-        width: 70px; 
-        height: 70px;
-        object-fit: cover;
-        border-radius: 50%;
+    cursor: pointer;
+}
+.list-item .name{
+    font-size: 1.5vw;
 
-        margin-left: 1vw;
-        margin-right: 1vw;
+    margin-right: 0.5vw;
 
-        cursor: pointer;
-    }
-    .list-item .name{
-        font-size: 1.5vw;
+    cursor: pointer;
+}
+.list-item .specialty{
+    color: gray;
 
-        margin-right: 0.5vw;
+    font-size: 1vw;
+}
+.list-item .follow{
+    font-size: 1vw;
 
-        cursor: pointer;
-    }
-    .list-item .specialty{
-        color: gray;
+    margin-left: auto;
+    margin-right: 1vw;
 
-        font-size: 1vw;
-    }
-    .list-item .follow{
-        font-size: 1vw;
-
-        margin-left: auto;
-        margin-right: 1vw;
-
-        cursor: pointer;
-    }
-</style>
-
+    cursor: pointer;
+}
 </style>

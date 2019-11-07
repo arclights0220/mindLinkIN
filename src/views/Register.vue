@@ -52,7 +52,7 @@ export default {
       err_username: "",
       err_nickname: "",
       err_password: "",
-      err_password_check: ""
+      err_password_check: "",
     };
   },
   methods: {
@@ -99,8 +99,8 @@ export default {
             alert("오류")
           });                                                             
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
