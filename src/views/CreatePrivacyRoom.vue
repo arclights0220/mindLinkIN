@@ -16,6 +16,7 @@
 </template>
 
 <script>
+import router from '../router/index'
 export default {
     data() {
         return {
@@ -36,7 +37,7 @@ export default {
 
             //정상일 때
             if (!this.err_roomname) {
-                
+              router.push('/fuck', init);
             }
         },
     },
