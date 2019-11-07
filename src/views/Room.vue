@@ -1,5 +1,5 @@
 <template>
-    <div id="sample" style="width:100vw;height:100vh">
+    <div id="temp" style="width:100vw;height:100vh">
         <div id="myDiagramDiv" onload="load()" style="border: solid 1px black; width:100vw; height:100vh;"></div>
         <button id="SaveButton" onclick="save()">Save</button>
         <button onclick="load()">Load</button>
@@ -29,7 +29,7 @@ export default {
       padding:0;
       margin: 0;
     }
-    #mySavedModel{
+    #temp{
         overflow:hidden;
     }
     button{

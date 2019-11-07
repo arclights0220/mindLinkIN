@@ -9,7 +9,7 @@ import TeamResearch from '../views/TeamResearch'
 import RoomResearch from '../views/RoomResearch'
 import CreateRoom from '../views/CreateRoom'
 import CreatePrivacyRoom from '../views/CreatePrivacyRoom'
-import Fuck from '../views/Fuck'
+import Room from '../views/Room'
 
 Vue.use(VueRouter)
 
@@ -51,8 +51,8 @@ const routes = [
     component: CreatePrivacyRoom
   },
   { 
-    path: '/fuck',
-    component: Fuck
+    path: '/room',
+    component: Room
   },
 ]
 
