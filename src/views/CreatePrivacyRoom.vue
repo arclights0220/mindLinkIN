@@ -51,7 +51,7 @@ export default {
       if (!this.err_roomname && !this.err_roomdetail) {
         this.$store.state.roomName = this.roomname;
         this.$store.state.roomDetail = this.roomdetail;
-        // this.$store.state.roomJson = null;
+        this.$store.state.roomJson = null;
         router.push("/room", init)
       }
     }

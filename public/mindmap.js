@@ -1,4 +1,4 @@
-var stroke=getElementById("stroke").value;
+
 
 function init() {
 

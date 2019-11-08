@@ -11,7 +11,7 @@ export default new Vuex.Store({
     rooms: [],
     roomName: "",
     roomDetail: "",
-    roomJson: ""
+    roomJson: "",
   },
   mutations: {},
   actions: {

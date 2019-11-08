@@ -63,7 +63,7 @@ export default {
               this.$store.state.userData = user; // 유저 정보
               this.$store.state.logon = true;
 
-              this.$store.state.rooms = localStorage.getItem(user.email + "_rooms");
+              this.$store.state.rooms =  JSON.parse(localStorage.getItem(user.email + "_rooms"));
               if(!this.$store.state.rooms) this.$store.state.rooms = [];
             });
             router.push("/");

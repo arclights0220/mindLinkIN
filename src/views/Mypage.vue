@@ -58,10 +58,10 @@
         <div class="main-rooms">
           <h1 id="rooms" class="title">회의실</h1>
           <List 
-          :items="rooms"
-          :showDetail="none"
+          :items="getRooms"
+          :showDetail="loadroom"
           :followText="'참여 요청'" :unfollowText="'나가기'" 
-          :followEvent="none" :unfollowEvent="none" 
+          :followEvent="none" :unfollowEvent="deleteroom" 
           />
           <div class="add" @click="roomResearch">
             <img src="../add.png" alt="">
@@ -89,7 +89,6 @@ export default {
       teams: [
         {username: 2, nickname: "에드캔", specialty: "찬효가 부장이니 곧 좋아질 예정", following: true},
       ],
-      rooms: this.$store.state.rooms,
     };
   },
   methods: {
@@ -116,13 +115,14 @@ export default {
       router.push("/research/room");
     },
     loadroom(item, idx){
-      // this.$store.state.roomName = item.username;
-      // this.$store.state.roomDetail = item.specialty;
-      // this.$store.state.roomJson = item.json;
-      // router.push("/room", init);
+      this.$store.state.roomName = item.nickname;
+      this.$store.state.roomDetail = item.specialty;
+      this.$store.state.roomJson = item.json;
+      router.push("/room", init);
     },
-    deleteroom(){
-
+    deleteroom(item, idx){
+      this.$store.state.rooms.splice(idx, 1);
+      localStorage.setItem(this.$store.state.userData.email + "_rooms", JSON.stringify(this.$store.state.rooms));
     },
     none(){
       alert("아직 개발 중인 기능입니다");
@@ -135,6 +135,9 @@ export default {
     getUserData() {
       return this.$store.state.userData;
     },
+    getRooms(){
+      return  this.$store.state.rooms;
+    }
   },
 };
 </script>

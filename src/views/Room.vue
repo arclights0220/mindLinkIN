@@ -26,7 +26,7 @@ export default {
     methods: {
         mjsonSave(){
             let roomname = this.$store.state.roomName;
-            let roomdetail = this.$store.state.roomName;
+            let roomdetail = this.$store.state.roomDetail;
             let userdata = this.$store.state.userData;
 
             let newroom = {
@@ -37,12 +37,18 @@ export default {
                 json: document.getElementById("mySavedModel").value
             };
 
+            let idx = this.$store.state.rooms.findIndex(x=>x.nickname == roomname)
+            if(idx != -1)
+                this.$store.state.rooms.splice(idx,1);
+
             this.$store.state.rooms.push(newroom);
+            localStorage.setItem(userdata.email + "_rooms", JSON.stringify(this.$store.state.rooms));
+            
             localStorage.setItem(userdata.email + "_rooms", this.$store.state.rooms);
         },
         quit(){
             let roomname = this.$store.state.roomName;
-            let roomdetail = this.$store.state.roomName;
+            let roomdetail = this.$store.state.roomDetail;
             let userdata = this.$store.state.userData;
 
             let newroom = {
@@ -52,21 +58,23 @@ export default {
                 following: true,
                 json: document.getElementById("mySavedModel").value
             };
+            
+            let idx = this.$store.state.rooms.findIndex(x=>x.nickname == roomname)
+            if(idx != -1)
+                this.$store.state.rooms.splice(idx,1);
 
             this.$store.state.rooms.push(newroom);
-            localStorage.setItem(userdata.email + "_rooms", this.$store.state.rooms);
+            localStorage.setItem(userdata.email + "_rooms", JSON.stringify(this.$store.state.rooms));
             
             router.push('/mypage');
         }
     },
-    created(){
+    mounted: function() {
+        init();
         if(this.$store.state.roomJson){
             document.getElementById("mySavedModel").value = this.$store.state.roomJson;
             Load();
         }
-    },
-    mounted: function() {
-        init();
     },
 }
 </script>
