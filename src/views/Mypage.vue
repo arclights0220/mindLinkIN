@@ -8,7 +8,7 @@
         <li class="menubar-item"><a href="#teams">팀</a></li>
         <li class="menubar-item"><a href="#rooms">회의실</a></li>
         <li class="menubar-search"><input type="text" id="search" placeholder="검색어 입력"/></li>
-        <li class="menubar-item" :class="{'hide':logon}" @click="mypageListener">{{getUserData.nickname}}</li>
+        <li class="menubar-item" :class="{'hide':logon}">{{getUserData.nickname}}</li>
         <li class="menubar-item menubar-login" v-if="!logon" @click="loginListener">로그인</li>
         <li class="menubar-item menubar-login" v-else @click="logoutListener">로그아웃</li>
       </ul>
