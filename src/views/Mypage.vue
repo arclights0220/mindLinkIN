@@ -4,9 +4,9 @@
       <ul id="menubar">
         <li class="menubar-logo"><img src="../assets/logo.png" alt=""/></li>
         <li class="menubar-title" @click="home">마인드링크</li>
-        <li class="menubar-item">친구</li>
-        <li class="menubar-item">팀</li>
-        <li class="menubar-item">회의실</li>
+        <li class="menubar-item"><a href="#friends">친구</a></li>
+        <li class="menubar-item"><a href="#teams">팀</a></li>
+        <li class="menubar-item"><a href="#rooms">회의실</a></li>
         <li class="menubar-search"><input type="text" id="search" placeholder="검색어 입력"/></li>
         <li class="menubar-item" v-if="logon" @click="mypageListener">{{getUserData.nickname}}</li>
         <li style="diplay: none;" v-else></li>
@@ -33,7 +33,7 @@
       </section>
       <section class="main">
         <div class="main-friends">
-          <h1 class="title">친구</h1>
+          <h1 id="friends" class="title">친구</h1>
           <List 
           :items="friends"
           :showDetail="showUserProfile"
@@ -45,7 +45,7 @@
           </div>
         </div>
         <div class="main-teams">
-          <h1 class="title">팀</h1>
+          <h1 id="teams" class="title">팀</h1>
           <List 
           :items="teams"
           :showDetail="showUserProfile"
@@ -57,7 +57,7 @@
           </div>
         </div>
         <div class="main-rooms">
-          <h1 class="title">회의실</h1>
+          <h1 id="rooms" class="title">회의실</h1>
           <List 
           :items="rooms"
           :showDetail="showUserProfile"
@@ -135,6 +135,11 @@ nav{
 }
 h1{
   margin: 0;
+}
+a{
+  color: white;
+  
+  text-decoration: none;
 }
 
 #mypage{

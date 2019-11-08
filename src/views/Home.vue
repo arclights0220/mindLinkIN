@@ -4,8 +4,8 @@
       <ul id="menubar">
         <li class="menubar-logo"><img src="../assets/logo.png" alt=""></li>
         <li class="menubar-title">마인드링크</li>
-        <li class="menubar-item">개요</li>
-        <li class="menubar-item">탐색</li>
+        <li class="menubar-item"><a href="#outline">개요</a></li>
+        <li class="menubar-item"><a href="#research">탐색</a></li>
         <li class="menubar-search"><input type="text" id="search" placeholder="검색어 입력"></li>
         <li class="menubar-item" v-if="logon" @click="mypage">{{getUserData.nickname}}</li>
         <li style="diplay: none;" v-else></li>
@@ -92,6 +92,11 @@ nav{
 }
 h1{
   margin: 0;
+}
+a{
+  color: white;
+  
+  text-decoration: none;
 }
 
 .image{

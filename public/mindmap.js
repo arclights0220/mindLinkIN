@@ -79,28 +79,28 @@ function init() {
   myDiagram.nodeTemplate.contextMenu =
     $("ContextMenu",
       $("ContextMenuButton",
-        $(go.TextBlock, "Bigger"),
+        $(go.TextBlock, "크게"),
         { click: function(e, obj) { changeTextSize(obj, 1.1); } }),
       $("ContextMenuButton",
-        $(go.TextBlock, "Smaller"),
+        $(go.TextBlock, "작게"),
         { click: function(e, obj) { changeTextSize(obj, 1 / 1.1); } }),
       $("ContextMenuButton",
-        $(go.TextBlock, "Bold/Normal"),
+        $(go.TextBlock, "굵게/얇게"),
         { click: function(e, obj) { toggleTextWeight(obj); } }),
       $("ContextMenuButton",
-        $(go.TextBlock, "Copy"),
+        $(go.TextBlock, "복사"),
         { click: function(e, obj) { e.diagram.commandHandler.copySelection(); } }),
       $("ContextMenuButton",
-        $(go.TextBlock, "Delete"),
+        $(go.TextBlock, "삭제"),
         { click: function(e, obj) { e.diagram.commandHandler.deleteSelection(); } }),
       $("ContextMenuButton",
-        $(go.TextBlock, "Undo"),
+        $(go.TextBlock, "되돌리기"),
         { click: function(e, obj) { e.diagram.commandHandler.undo(); } }),
       $("ContextMenuButton",
-        $(go.TextBlock, "Redo"),
+        $(go.TextBlock, "다시실행"),
         { click: function(e, obj) { e.diagram.commandHandler.redo(); } }),
       $("ContextMenuButton",
-        $(go.TextBlock, "Sort"),
+        $(go.TextBlock, "정렬"),
         {
           click: function(e, obj) {
             var adorn = obj.part;
@@ -131,22 +131,22 @@ function init() {
   myDiagram.contextMenu =
     $("ContextMenu",
       $("ContextMenuButton",
-        $(go.TextBlock, "Paste"),
+        $(go.TextBlock, "붙여넣기"),
         { click: function(e, obj) { e.diagram.commandHandler.pasteSelection(e.diagram.lastInput.documentPoint); } }),
       $("ContextMenuButton",
-        $(go.TextBlock, "Undo"),
+        $(go.TextBlock, "되돌리기"),
         { click: function(e, obj) { e.diagram.commandHandler.undo(); } },
         new go.Binding("visible", "", function(o) { return o.diagram && o.diagram.commandHandler.canUndo(); }).ofObject()),
       $("ContextMenuButton",
-        $(go.TextBlock, "Redo"),
+        $(go.TextBlock, "다시실행"),
         { click: function(e, obj) { e.diagram.commandHandler.redo(); } },
         new go.Binding("visible", "", function(o) { return o.diagram && o.diagram.commandHandler.canRedo(); }).ofObject()),
       $("ContextMenuButton",
-        $(go.TextBlock, "Save"),
-        { click: function(e, obj) { save(); } }),
+        $(go.TextBlock, "저장"),
+        { click: function(e, obj) { Save(); } }),
       $("ContextMenuButton",
-        $(go.TextBlock, "Load"),
-        { click: function(e, obj) { load(); } })
+        $(go.TextBlock, "불러오기"),
+        { click: function(e, obj) { Load(); } })
     );
 
   myDiagram.addDiagramListener("SelectionMoved", function(e) {
@@ -163,7 +163,7 @@ function init() {
     });
   });
 
-  load();
+  Load();
 }
 
 function spotConverter(dir, from) {
@@ -268,12 +268,12 @@ function Sort() {
   myDiagram.commitTransaction("Layout");
 }
 
-function save() {
-  document.getElementById("mySavedMoedl").value = myDiagram.model.toJson();
+function Save() {
+  document.getElementById("mySavedModel").value = myDiagram.model.toJson();
   myDiagram.isModified = false;
   
 }
-function load() {
+function Load() {
   myDiagram.model = go.Model.fromJson(document.getElementById("mySavedModel").value);
   Sort();
 }
