@@ -1,48 +1,52 @@
 <template>
-    <div id="createprivacyroom">
-        <form class="box" @submit="submit">
-            <h1>회의실 생성</h1>
-            <input
-                type="text"
-                name="roomname"
-                placeholder="회의실 제목"
-                v-model="roomname"
-                :class="{'input-err':err_roomname}"
-            />
-            <div style="color: red;">{{err_roomname}}</div>
-            <button type="submit" name="submit">생성</button>
-        </form>
-    </div>
+  <div id="createprivacyroom">
+    <form class="box" @submit="submit">
+      <h1>회의실 생성</h1>
+      <input
+        type="text"
+        name="roomname"
+        placeholder="회의실 제목"
+        v-model="roomname"
+        :class="{'input-err':err_roomname}"
+      />
+      <div style="color: red;">{{err_roomname}}</div>
+      <button type="submit" name="submit">생성</button>
+    </form>
+  </div>
 </template>
 
 <script>
-import router from '../router/index'
+import router from "../router/index";
 export default {
-    data() {
-        return {
-            roomname: "",
+  data() {
+    return {
+      roomname: "",
+      err_roomname: ""
+    };
+  },
+  methods: {
+    submit(e) {
+      e.preventDefault();
 
-            err_roomname: "",
-        };
-    },
-    methods: {
-        submit(e) {
-            e.preventDefault();
+      //에러 초기화
+      this.err_roomname = "";
 
-            //에러 초기화
-            this.err_roomname = "";
+      //폼 확인
+      if (this.roomname == "") this.err_roomname = "제목을 입력해주세요";
 
-            //폼 확인
-            if (this.roomname == "") this.err_roomname = "제목을 입력해주세요";
-
-            //정상일 때
-            if (!this.err_roomname) {
-              this.$store.state.roomName=this.roomname;
-              router.push('/room', init);
-            }
-        },
-    },
-}
+      //정상일 때
+      if (!this.err_roomname) {
+        this.$store.state.roomName = this.roomname;
+      }
+    }
+  },
+  computed: {
+    getData(){
+      return this.$store.state.userdata;
+      
+    }
+  }
+};
 </script>
 
 <style scoped>

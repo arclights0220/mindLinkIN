@@ -4,6 +4,7 @@
         <button id="SaveButton" onclick="save()">Save</button>
         <button onclick="load()">Load</button>
         <button onclick="Sort()">Sort</button>
+        <button onclick="lastSave()"  id="pushJson">Save&Out</button>
         <textarea id="mySavedModel" style="width:100%;height:400px; display:none;">
             { 
                 "class": "go.TreeModel",
@@ -16,11 +17,22 @@
 </template>
 
 <script>
-
 export default {
+    data: {
+        return(){
+
+        }
+    },
+        methods: {
+        lastSave(){
+            
+        }
+        
+    },
     mounted: function() {
         init();
-    }
+    },
+
 }
 </script>
 

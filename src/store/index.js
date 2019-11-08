@@ -7,7 +7,8 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     logon: false,
-    userData : {}
+    userData : {},
+    roomName: ""
   },
   mutations: {},
   actions: {
