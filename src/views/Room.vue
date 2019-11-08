@@ -4,7 +4,7 @@
         <button id="SaveButton" onclick="save()">Save</button>
         <button onclick="load()">Load</button>
         <button onclick="Sort()">Sort</button>
-        <button onclick="lastSave()"  id="pushJson">Save&Out</button>
+        <button onclick="lastSave()" @click="modelSave"  id="pushJson">Save&Out</button>
         <textarea id="mySavedModel" style="width:100%;height:400px; display:none;">
             { 
                 "class": "go.TreeModel",
@@ -24,8 +24,8 @@ export default {
         }
     },
         methods: {
-        lastSave(){
-            
+        modelSave(){
+          this.$store.state.Mjson = myDiagram.model.toJson()
         }
         
     },

@@ -37,12 +37,13 @@ export default {
       //정상일 때
       if (!this.err_roomname) {
         this.$store.state.roomName = this.roomname;
+        router.push("/room", init)
       }
     }
   },
   computed: {
     getData(){
-      return this.$store.state.userdata;
+      return this.$store.state.user;
       
     }
   }
