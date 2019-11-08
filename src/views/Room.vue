@@ -1,6 +1,7 @@
 <template>
     <div id="temp" style="width:100vw;height:100vh">
         <div id="myDiagramDiv" onload="load()" style="border: solid 1px black; width:100vw; height:100vh;"></div>
+        <div>{{getData.roomName, getUserData.userData}}</div>
         <button id="SaveButton" onclick="save()">Save</button>
         <button onclick="load()">Load</button>
         <button onclick="Sort()">Sort</button>
@@ -32,6 +33,14 @@ export default {
     mounted: function() {
         init();
     },
+    computed: {
+        getData(){
+            return this.$store.state.roomName;
+        },
+        getUserData(){
+            return this.$store.state.userData;
+        }
+    }
 
 }
 </script>
