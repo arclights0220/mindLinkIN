@@ -4,9 +4,9 @@
 
         <List 
         :items="data"
-        :showDetail="showRoomProfile"
+        :showDetail="none"
         :followText="'참여 요청'" :unfollowText="'나가기'" 
-        :followEvent="join" :unfollowEvent="leave" 
+        :followEvent="none" :unfollowEvent="none" 
         />
         <div class="add" @click="createRoom">
             <img src="../add.png" alt="">
@@ -26,28 +26,19 @@ export default {
             data: [
                 {username: 1, nickname: "디콘방", specialty: "얘들아 미안해 ㅜㅜ", following: true},
                 {username: 2, nickname: "천코대", specialty: "준상아 미안해 ㅜㅜ", following: false},
-                {username: 3, nickname: "정보통신 수행방", specialty: "시온아 미리 미안해 ㅜㅜ", following: true},
+                {username: 3, nickname: "정통수행", specialty: "시온아 미리 미안해 ㅜㅜ", following: true},
             ],
         }
     },
     methods:{
-        showRoomProfile(id){
-            console.log('show');
-            return;
-        },
-        join(id){
-            console.log('join');
-            return;
-        },
-        leave(id){
-            console.log('left');
-            return;
-        },
         createRoom(){
             if(this.$store.state.logon)
                 router.push('/create/room/privacy');
             else
                 router.push('/login');
+        },
+        none(){
+            alert("아직 개발 중인 기능입니다");
         },
     },
     computed:{

@@ -10,6 +10,14 @@
         :class="{'input-err':err_roomname}"
       />
       <div style="color: red;">{{err_roomname}}</div>
+      <input
+        type="text"
+        name="roomdetail"
+        placeholder="회의실 설명"
+        v-model="roomdetail"
+        :class="{'input-err':err_roomdetail}"
+      />
+      <div style="color: red;">{{err_roomdetail}}</div>
       <button type="submit" name="submit">생성</button>
     </form>
   </div>
@@ -21,7 +29,10 @@ export default {
   data() {
     return {
       roomname: "",
-      err_roomname: ""
+      roomdetail: "",
+
+      err_roomname: "",
+      err_roomdetail: "",
     };
   },
   methods: {
@@ -30,13 +41,17 @@ export default {
 
       //에러 초기화
       this.err_roomname = "";
+      this.err_roomdetail = "";
 
       //폼 확인
       if (this.roomname == "") this.err_roomname = "제목을 입력해주세요";
+      if (this.roomdetail == "") this.err_roomdetail = "설명을 입력해주세요";
 
       //정상일 때
-      if (!this.err_roomname) {
+      if (!this.err_roomname && !this.err_roomdetail) {
         this.$store.state.roomName = this.roomname;
+        this.$store.state.roomDetail = this.roomdetail;
+        // this.$store.state.roomJson = null;
         router.push("/room", init)
       }
     }
@@ -44,7 +59,6 @@ export default {
   computed: {
     getData(){
       return this.$store.state.user;
-      
     }
   }
 };

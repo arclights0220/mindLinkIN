@@ -4,11 +4,11 @@
 
         <List 
         :items="data"
-        :showDetail="showUserProfile"
+        :showDetail="none"
         :followText="'친구 추가'" :unfollowText="'친구 삭제'" 
-        :followEvent="follow" :unfollowEvent="unfollow" 
+        :followEvent="none" :unfollowEvent="none" 
         />
-        <div class="add">
+        <div class="add" @click="none">
             <img src="../add.png" alt="">
         </div>
     </div>
@@ -26,21 +26,14 @@ export default {
                 {username: 1, nickname: "신진혁", specialty: "C/C++", following: false},
                 {username: 2, nickname: "송호준", specialty: "Web Engineering", following: true},
                 {username: 3, nickname: "이준상", specialty: "algorithm", following: false},
+                {username: 4, nickname: "박창우", specialty: "운명 수호", following: true},
+                {username: 5, nickname: "김도영", specialty: "Assembly", following: true},
             ],
         }
     },
     methods:{
-        showUserProfile(id){
-            console.log('show');
-            return;
-        },
-        follow(id){
-            console.log('follow');
-            return;
-        },
-        unfollow(id){
-            console.log('unfollow');
-            return;
+        none(){
+            alert("아직 개발 중인 기능입니다");
         },
     },
 }

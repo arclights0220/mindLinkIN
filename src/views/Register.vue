@@ -91,12 +91,11 @@ export default {
           .dispatch("REGISTER", userobj)
           .then(data => {
             console.log(data);
-            this.$store.state.logon = true;
             router.push("/login");
           })
           .catch(err => {
             console.log(err);
-            alert("오류")
+            alert("오류");
           });                                                             
       }
     },

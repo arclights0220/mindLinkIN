@@ -57,17 +57,20 @@ export default {
           })
           .then(data => {
             let token = data.data.data;
-            this.$store.state.logon = token; // login 토큰
+            sessionStorage.setItem("token",token)
             this.$store.dispatch("GET_USER", token).then(data => {
               let user = data.data.data;
               this.$store.state.userData = user; // 유저 정보
-            });
+              this.$store.state.logon = true;
 
+              this.$store.state.rooms = localStorage.getItem(user.email + "_rooms");
+              if(!this.$store.state.rooms) this.$store.state.rooms = [];
+            });
             router.push("/");
           })
           .catch(err => {
-            console.log(err);
-            alert("사용자 정보가 없거나 서버 점검중입니다...");
+            if(err.message == "Network Error") alert("네트워크를 확인하세요");
+            else alert("가입하지 않은 아이디이거나 잘못된 비밀번호입니다");
           });
       }
     },

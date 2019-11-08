@@ -58,6 +58,7 @@ export default {
       if(confirm("정말로 로그아웃 하시겠습니까?")){
         this.$store.state.logon = false;
         this.$store.state.userData = {};
+        sessionStorage.removeItem("token");
         router.push('/');
       }
     },

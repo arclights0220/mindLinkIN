@@ -1,11 +1,11 @@
 <template>
     <div id="list">
-        <div class="list-item" v-for="item in items" :key="item.username">
-            <img class="image" src="../test_pi.jpg" alt="" @click="showDetail(item.username)">
-            <span class="name" @click="showDetail(item.username)">{{item.nickname}}</span>
+        <div class="list-item" v-for="(item, idx) in items" :key="item.username">
+            <img class="image" src="../test_pi.jpg" alt="" @click="showDetail(item, idx)">
+            <span class="name" @click="showDetail(item, idx)">{{item.nickname}}</span>
             <span class="specialty">{{item.specialty}}</span>
-            <span class="follow" style="color: red" v-if="item.following" @click="unfollowEvent(item.username)">{{unfollowText}}</span>
-            <span class="follow" style="color: green" v-else @click="followEvent(item.username)">{{followText}}</span>
+            <span class="follow" style="color: red" v-if="item.following" @click="unfollowEvent(item, idx)">{{unfollowText}}</span>
+            <span class="follow" style="color: green" v-else @click="followEvent(item, idx)">{{followText}}</span>
         </div>
     </div>
 </template>

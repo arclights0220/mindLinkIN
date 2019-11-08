@@ -8,8 +8,10 @@ export default new Vuex.Store({
   state: {
     logon: false,
     userData : {},
+    rooms: [],
     roomName: "",
-    Mjson: ""
+    roomDetail: "",
+    roomJson: ""
   },
   mutations: {},
   actions: {

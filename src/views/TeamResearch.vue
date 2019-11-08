@@ -4,11 +4,11 @@
 
         <List 
         :items="data"
-        :showDetail="showTeamProfile"
+        :showDetail="none"
         :followText="'가입 요청'" :unfollowText="'나가기'" 
-        :followEvent="join" :unfollowEvent="leave" 
+        :followEvent="none" :unfollowEvent="none" 
         />
-        <div class="add">
+        <div class="add" @click="none">
             <img src="../add.png" alt="">
         </div>
     </div>
@@ -30,17 +30,8 @@ export default {
         }
     },
     methods:{
-        showTeamProfile(id){
-            console.log('show');
-            return;
-        },
-        join(id){
-            console.log('join');
-            return;
-        },
-        leave(id){
-            console.log('left');
-            return;
+        none(){
+            alert("아직 개발 중인 기능입니다");
         },
     },
 }

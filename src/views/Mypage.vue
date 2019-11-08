@@ -8,8 +8,7 @@
         <li class="menubar-item"><a href="#teams">팀</a></li>
         <li class="menubar-item"><a href="#rooms">회의실</a></li>
         <li class="menubar-search"><input type="text" id="search" placeholder="검색어 입력"/></li>
-        <li class="menubar-item" v-if="logon" @click="mypageListener">{{getUserData.nickname}}</li>
-        <li style="diplay: none;" v-else></li>
+        <li class="menubar-item" :class="{'hide':logon}" @click="mypageListener">{{getUserData.nickname}}</li>
         <li class="menubar-item menubar-login" v-if="!logon" @click="loginListener">로그인</li>
         <li class="menubar-item menubar-login" v-else @click="logoutListener">로그아웃</li>
       </ul>
@@ -36,11 +35,11 @@
           <h1 id="friends" class="title">친구</h1>
           <List 
           :items="friends"
-          :showDetail="showUserProfile"
+          :showDetail="none"
           :followText="'친구 추가'" :unfollowText="'친구 삭제'" 
-          :followEvent="follow" :unfollowEvent="unfollow" 
+          :followEvent="none" :unfollowEvent="none" 
           />
-          <div class="add">
+          <div class="add" @click="friendResearch">
             <img src="../add.png" alt="">
           </div>
         </div>
@@ -48,11 +47,11 @@
           <h1 id="teams" class="title">팀</h1>
           <List 
           :items="teams"
-          :showDetail="showUserProfile"
+          :showDetail="none"
           :followText="'가입 요청'" :unfollowText="'나가기'" 
-          :followEvent="follow" :unfollowEvent="unfollow" 
+          :followEvent="none" :unfollowEvent="none" 
           />
-          <div class="add">
+          <div class="add" @click="teamResearch">
             <img src="../add.png" alt="">
           </div>
         </div>
@@ -60,9 +59,9 @@
           <h1 id="rooms" class="title">회의실</h1>
           <List 
           :items="rooms"
-          :showDetail="showUserProfile"
+          :showDetail="none"
           :followText="'참여 요청'" :unfollowText="'나가기'" 
-          :followEvent="follow" :unfollowEvent="unfollow" 
+          :followEvent="none" :unfollowEvent="none" 
           />
           <div class="add" @click="roomResearch">
             <img src="../add.png" alt="">
@@ -83,17 +82,14 @@ export default {
   data() {
     return {
       friends: [
-        {username: 1, nickname: "박창우", specialty: "운명 수호", following: true},
         {username: 2, nickname: "송호준", specialty: "Web Engineering", following: true},
-        {username: 3, nickname: "김도영", specialty: "Assembly", following: true},
+        {username: 4, nickname: "박창우", specialty: "운명 수호", following: true},
+        {username: 5, nickname: "김도영", specialty: "Assembly", following: true},
       ],
       teams: [
         {username: 2, nickname: "에드캔", specialty: "찬효가 부장이니 곧 좋아질 예정", following: true},
       ],
-      rooms: [
-        {username: 1, nickname: "디콘방", specialty: "얘들아 미안해 ㅜㅜ", following: true},
-        {username: 3, nickname: "정보통신 수행방", specialty: "시온아 미리 미안해 ㅜㅜ", following: true},       
-      ],
+      rooms: this.$store.state.rooms,
     };
   },
   methods: {
@@ -110,11 +106,26 @@ export default {
     home() {
       router.push("/");
     },
+    friendResearch(){
+      router.push("/research/friend");
+    },
+    teamResearch(){
+      router.push("/research/team");
+    },
     roomResearch(){
       router.push("/research/room");
     },
+    loadroom(item, idx){
+      // this.$store.state.roomName = item.username;
+      // this.$store.state.roomDetail = item.specialty;
+      // this.$store.state.roomJson = item.json;
+      // router.push("/room", init);
+    },
+    deleteroom(){
+
+    },
     none(){
-      return;
+      alert("아직 개발 중인 기능입니다");
     },
   },
   computed: {
@@ -140,6 +151,10 @@ a{
   color: white;
   
   text-decoration: none;
+}
+
+.hide{
+  display: none;
 }
 
 #mypage{
