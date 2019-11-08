@@ -1,11 +1,9 @@
 <template>
     <div id="temp" style="width:100vw;height:100vh">
-        <div id="myDiagramDiv" onload="load()" style="border: solid 1px black; width:100vw; height:100vh;"></div>
-        <div>{{getData.roomName, getUserData.userData}}</div>
-        <button id="SaveButton" onclick="save()">Save</button>
-        <button onclick="load()">Load</button>
-        <button onclick="Sort()">Sort</button>
-        <button onclick="lastSave()" @click="modelSave"  id="pushJson">Save&Out</button>
+        <div id="myDiagramDiv" onload="load()" style="width:100vw; height:100vh;"></div>
+        <div>{{getData.roomName}}, {{getUserData.userData}}</div>
+        <button onclick="Sort()">Sort</button>  
+        <button onclick="Save()" @click="modelSave" id="pushJson">SaveOut</button>
         <textarea id="mySavedModel" style="width:100%;height:400px; display:none;">
             { 
                 "class": "go.TreeModel",
@@ -18,16 +16,18 @@
 </template>
 
 <script>
+import router from "../router/index";
 export default {
-    data: {
-        return(){
+    data(){
+        return{
 
         }
     },
-        methods: {
+    methods: {
         modelSave(){
-          this.$store.state.Mjson = myDiagram.model.toJson()
-        }
+            this.$store.state.Mjson = document.getElementById("mySavedModel").value;
+            router.push('/mypage');
+        },
         
     },
     mounted: function() {

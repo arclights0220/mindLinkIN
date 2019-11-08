@@ -9,7 +9,7 @@ export default new Vuex.Store({
     logon: false,
     userData : {},
     roomName: "",
-    Mjson: {}
+    Mjson: ""
   },
   mutations: {},
   actions: {

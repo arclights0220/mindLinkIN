@@ -225,7 +225,7 @@ function addNodeAndLink(e, obj) {
 
 function layoutTree(node) {
   if (node.data.key === 0) { 
-    layoutAll();  
+    Sort();  
   } else {  
     var parts = node.findTreeParts();
     layoutAngle(parts, node.data.dir === "left" ? 180 : 0);
@@ -245,7 +245,7 @@ function layoutAngle(parts, angle) {
   layout.doLayout(parts);
 }
 
-function layoutAll() {
+function Sort() {
   var root = myDiagram.findNodeForKey(0);
   if (root === null) return;
   myDiagram.startTransaction("Layout");
@@ -269,15 +269,11 @@ function layoutAll() {
 }
 
 function save() {
-  document.getElementById("mySavedModel").value = myDiagram.model.toJson();
+  document.getElementById("mySavedMoedl").value = myDiagram.model.toJson();
   myDiagram.isModified = false;
   
 }
 function load() {
   myDiagram.model = go.Model.fromJson(document.getElementById("mySavedModel").value);
-  layoutAll();
-}
-function lastSave(){
-  document.getElementById("mySavedModel").value = myDiagram.model.toJson();
-  myDiagram.isModified = false;
+  Sort();
 }
